@@ -29,3 +29,23 @@ class Tower(Obj):
             self.kill()
 
 
+class Coin(Obj):
+    def __init__(self, img, x, y, width = None, height = None, *groups):
+        super().__init__(img, x, y, width, height, *groups)
+
+        self.ticks = 0
+
+    def update(self, *args):
+        self.move()
+        self.anim()
+
+    def move(self):
+        self.rect.x -= 5
+
+        if self.rect.x <= -82:
+            self.kill()
+
+    def anim(self):
+        self.ticks = (self.ticks + 1) % 8
+        self.image = pygame.image.load("assets/coin/coin" + str(self.ticks) + ".PNG")
+
