@@ -1,5 +1,7 @@
-import pygame
 from obj import Obj, Tower
+import pygame
+import random
+
 
 class Game:
     def __init__(self):
@@ -42,11 +44,11 @@ class Game:
             self.ground_2.rect.x = 360
 
     def spawn_towers(self):
-        self.ticks += 0.5
+        self.ticks += 1
 
-        if self.ticks >= 30:
+        if self.ticks >= random.randrange(80, 110):
             self.ticks = 0
-            tower = Tower("assets/tower1.png", 360, 320, 82, 196, self.all_sprites)
-            tower_2 = Tower("assets/tower2.png", 360, -30, 82, 196, self.all_sprites)
+            tower = Tower("assets/tower1.png", 360, random.randrange(350, 400), 82, 440, self.all_sprites)
+            tower_2 = Tower("assets/tower2.png", 360, random.randrange(-200, -150), 82, 440, self.all_sprites)
 
 
