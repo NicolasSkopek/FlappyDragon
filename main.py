@@ -12,7 +12,7 @@ class Main:
 
         pygame.mixer_music.load("assets/sounds/darkfantasy.mp3")
         pygame.mixer_music.play(-1)
-        pygame.mixer.music.set_volume(0.05)
+        pygame.mixer.music.set_volume(0.03)
 
         icon = pygame.image.load("assets/dragons/dragon1.png")
         icon = pygame.transform.scale(icon, (32, 32))

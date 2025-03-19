@@ -55,6 +55,9 @@ class Dragon(Obj):
     def __init__(self, img, x, y, width = None, height = None, *groups):
         super().__init__(img, x, y, width, height, *groups)
 
+        self.sound_hit = pygame.mixer.Sound("assets/sounds/hurt.mp3")
+        self.sound_coin = pygame.mixer.Sound("assets/sounds/point.mp3")
+
         self.ticks = 0
         self.frame = 0
         self.vel = 4
@@ -104,13 +107,15 @@ class Dragon(Obj):
         col = pygame.sprite.spritecollide(self, group, False)
 
         if col:
-           self.play = False
+            self.sound_hit.play()
+            self.play = False
 
     def collision_coin(self, group):
 
         col = pygame.sprite.spritecollide(self, group, True)
 
         if col:
+            self.sound_coin.play()
             self.pts += 1
 
 class Text:

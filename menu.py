@@ -24,7 +24,7 @@ class Menu:
 
     def draw(self, window):
         self.all_sprites.draw(window)
-        self.text_score.draw(window, 145, 290)
+        self.text_score.draw(window, 160, 290)
 
     def update(self, pts):
         self.all_sprites.update()

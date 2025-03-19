@@ -35,8 +35,8 @@ class Game:
 
     def update(self):
         self.move_bg()
-
         if self.dragon.play:
+            self.move_ground()
             self.spawn_towers()
             self.dragon.collision_towers(self.towers_group)
             self.dragon.collision_coin(self.coin_group)
@@ -54,6 +54,7 @@ class Game:
         if self.bg_2_1.rect.x <= 0:
             self.bg_2_1.rect.x = 640
 
+    def move_ground(self):
         self.ground.rect.x -= 5
         self.ground_2.rect.x -= 5
 
@@ -69,7 +70,7 @@ class Game:
             self.ticks = 0
             tower = Tower("assets/tower1.png", 360, random.randrange(300, 450), 82, 440, self.all_sprites, self.towers_group)
             tower_2 = Tower("assets/tower2.png", 360, tower.rect.y - 680, 82, 440, self.all_sprites, self.towers_group)
-            coin = Coin("assets/coin/coin0.png", 395, tower.rect.y - 110, 17*2.6, 16*2.6, self.all_sprites, self.coin_group)
+            coin = Coin("assets/coin/coin0.png", 390, tower.rect.y - 110, 17*2.6, 16*2.6, self.all_sprites, self.coin_group)
 
     def gameover(self):
         self.timer += 1
