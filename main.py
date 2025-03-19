@@ -1,5 +1,6 @@
 import pygame
 from game import Game
+from menu import Menu
 
 pygame.mixer.init()
 
@@ -21,15 +22,24 @@ class Main:
         self.fps = pygame.time.Clock()
 
         self.game = Game()
+        self.menu = Menu()
 
     def events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.loop = False
+                pygame.quit()
+            if not self.menu.change_scene:
+                self.menu.events(event)
 
     def draw(self):
-        self.game.draw(self.window)
-        self.game.update()
+        if not self.menu.change_scene:
+            self.menu.draw(self.window)
+            self.menu.update(str(self.game.max_score))
+        elif not self.game.change_scene:
+            self.game.draw(self.window)
+            self.game.update()
+        else:
+            self.loop = False
 
     def update(self):
         while self.loop:
@@ -38,4 +48,6 @@ class Main:
             self.draw()
             pygame.display.flip()
 
-Main().update()
+loop = True
+while loop:
+    Main().update()

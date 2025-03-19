@@ -18,11 +18,16 @@ class Game:
         self.ground = Obj("assets/ground.png", 0, 400, 360, 360, self.all_sprites)
         self.ground_2 = Obj("assets/ground.png", 360, 400, 360, 360, self.all_sprites)
 
-        self.dragon = Dragon("assets/dragons/dragon1.png", 10, 230, 144, 90, self.all_sprites)
+        self.dragon = Dragon("assets/dragons/dragon0.png", 10, 230, 110, 90, self.all_sprites)
 
         self.score = Text(100, str(self.dragon.pts))
 
+        self.change_scene = False
+
         self.ticks = 0
+        self.timer = 0
+        self.max_score = 0
+        self.check_score()
 
     def draw(self, window):
         self.all_sprites.draw(window)
@@ -30,13 +35,16 @@ class Game:
 
     def update(self):
         self.move_bg()
-        self.all_sprites.update()
 
         if self.dragon.play:
             self.spawn_towers()
             self.dragon.collision_towers(self.towers_group)
             self.dragon.collision_coin(self.coin_group)
             self.score.text_update(str(self.dragon.pts))
+            self.all_sprites.update()
+        else:
+            self.max_scores()
+            self.gameover()
 
     def move_bg(self):
         self.bg_2.rect.x -= 1
@@ -63,3 +71,19 @@ class Game:
             tower_2 = Tower("assets/tower2.png", 360, tower.rect.y - 680, 82, 440, self.all_sprites, self.towers_group)
             coin = Coin("assets/coin/coin0.png", 395, tower.rect.y - 110, 17*2.6, 16*2.6, self.all_sprites, self.coin_group)
 
+    def gameover(self):
+        self.timer += 1
+        if self.timer >= 30:
+            self.change_scene = True
+
+    def max_scores(self):
+        if self.dragon.pts > self.max_score:
+            self.max_score = self.dragon.pts
+            file = open("save.txt", "w")
+            file.write(str(self.max_score))
+            file.close()
+
+    def check_score(self):
+        file = open("save.txt", "r")
+        self.max_score = int(file.read())
+        file.close()

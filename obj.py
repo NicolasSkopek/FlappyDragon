@@ -78,7 +78,7 @@ class Dragon(Obj):
         if self.frame == 3:
             self.frame = 0
 
-        self.image = pygame.image.load("assets/dragons/dragon" + str(self.frame) + ".PNG")
+        self.image = pygame.image.load("assets/dragon" + str(self.frame) + ".PNG")
 
     def move(self):
         key = pygame.key.get_pressed()
