@@ -15,4 +15,17 @@ class Obj(pygame.sprite.Sprite):
     def drawing(self, window):
         pass
 
+class Tower(Obj):
+    def __init__(self, img, x, y, width = None, height = None, *groups):
+        super().__init__(img, x, y, width, height,*groups)
+
+    def update(self, *args):
+        self.move()
+
+    def move(self):
+        self.rect.x -= 5
+
+        if self.rect.x <= -82:
+            self.kill()
+
 
