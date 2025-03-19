@@ -58,6 +58,8 @@ class Dragon(Obj):
         self.vel = 4
         self.grav = 1
 
+        self.play = True
+
     def update(self, *args):
 
         self.move()
@@ -83,12 +85,27 @@ class Dragon(Obj):
         if self.vel >= 15:
             self.vel = 15
 
-        if key[pygame.K_SPACE]:
-            self.anim()
-            self.vel -= 3
+        if self.play:
+            if key[pygame.K_SPACE]:
+                self.anim()
+                self.vel -= 3
 
         if self.rect.y >= 440:
             self.rect.y = 440
         elif self.rect.y <= -30:
             self.rect.y = -30
             self.vel = 4
+
+    def collision_towers(self, group):
+
+        col = pygame.sprite.spritecollide(self, group, False)
+
+        if col:
+           self.play = False
+
+    def collision_coin(self, group):
+
+        col = pygame.sprite.spritecollide(self, group, True)
+
+        if col:
+            print("coin")
