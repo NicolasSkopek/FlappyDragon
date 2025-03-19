@@ -1,4 +1,4 @@
-from obj import Obj, Tower, Coin, Dragon
+from obj import Obj, Tower, Coin, Dragon, Text
 import pygame
 import random
 
@@ -20,10 +20,13 @@ class Game:
 
         self.dragon = Dragon("assets/dragons/dragon1.png", 10, 230, 144, 90, self.all_sprites)
 
+        self.score = Text(100, str(self.dragon.pts))
+
         self.ticks = 0
 
     def draw(self, window):
         self.all_sprites.draw(window)
+        self.score.draw(window, 10, 0)
 
     def update(self):
         self.move_bg()
@@ -33,6 +36,7 @@ class Game:
             self.spawn_towers()
             self.dragon.collision_towers(self.towers_group)
             self.dragon.collision_coin(self.coin_group)
+            self.score.text_update(str(self.dragon.pts))
 
     def move_bg(self):
         self.bg_2.rect.x -= 1

@@ -1,5 +1,7 @@
 import pygame
 
+pygame.font.init()
+
 class Obj(pygame.sprite.Sprite):
     def __init__(self, img, x, y, width = None, height = None, *groups):
         super().__init__(*groups)
@@ -58,6 +60,8 @@ class Dragon(Obj):
         self.vel = 4
         self.grav = 1
 
+        self.pts = 0
+
         self.play = True
 
     def update(self, *args):
@@ -84,7 +88,6 @@ class Dragon(Obj):
 
         if self.vel >= 15:
             self.vel = 15
-
         if self.play:
             if key[pygame.K_SPACE]:
                 self.anim()
@@ -108,4 +111,16 @@ class Dragon(Obj):
         col = pygame.sprite.spritecollide(self, group, True)
 
         if col:
-            print("coin")
+            self.pts += 1
+
+class Text:
+    def __init__(self, size, text):
+
+        self.font = pygame.font.Font("assets/font/font.ttf", size)
+        self.render = self.font.render(text, True, (255,255,255))
+
+    def draw(self, window, x, y):
+        window.blit(self.render, (x, y))
+
+    def text_update(self, text):
+        self.render = self.font.render(text, True, (255, 255, 255))
