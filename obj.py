@@ -49,3 +49,31 @@ class Coin(Obj):
         self.ticks = (self.ticks + 1) % 8
         self.image = pygame.image.load("assets/coin/coin" + str(self.ticks) + ".PNG")
 
+class Dragon(Obj):
+    def __init__(self, img, x, y, width = None, height = None, *groups):
+        super().__init__(img, x, y, width, height, *groups)
+
+        self.ticks = 0
+        self.frame = 0
+
+    def update(self, *args):
+        self.anim()
+        self.move()
+
+    def anim(self):
+        self.ticks += 1
+
+        if self.ticks >= 3:
+            self.ticks = 0
+            self.frame += 1
+
+        if self.frame == 3:
+            self.frame = 0
+
+        self.image = pygame.image.load("assets/dragons/dragon" + str(self.frame) + ".PNG")
+
+    def move(self):
+        key = pygame.key.get_pressed()
+
+        if key[pygame.K_SPACE]:
+            print("VOAR")

@@ -1,4 +1,4 @@
-from obj import Obj, Tower, Coin
+from obj import Obj, Tower, Coin, Dragon
 import pygame
 import random
 
@@ -16,6 +16,8 @@ class Game:
 
         self.ground = Obj("assets/ground.png", 0, 400, 360, 360, self.all_sprites)
         self.ground_2 = Obj("assets/ground.png", 360, 400, 360, 360, self.all_sprites)
+
+        self.dragon = Dragon("assets/dragons/dragon1.png", 10, 230, 36, 22.5, self.all_sprites)
 
         self.ticks = 0
 
@@ -48,7 +50,7 @@ class Game:
 
         if self.ticks >= random.randrange(80, 110):
             self.ticks = 0
-            tower = Tower("assets/tower1.png", 360, random.randrange(300, 420), 82, 440, self.all_sprites)
-            tower_2 = Tower("assets/tower2.png", 360, tower.rect.y - 550, 82, 440, self.all_sprites)
-            coin = Coin("assets/coin/coin0.png", 395, tower.rect.y - 70, 17*2.6, 16*2.6, self.all_sprites)
+            tower = Tower("assets/tower1.png", 360, random.randrange(300, 450), 82, 440, self.all_sprites)
+            tower_2 = Tower("assets/tower2.png", 360, tower.rect.y - 650, 82, 440, self.all_sprites)
+            coin = Coin("assets/coin/coin0.png", 395, tower.rect.y - 110, 17*2.6, 16*2.6, self.all_sprites)
 
