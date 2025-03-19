@@ -55,9 +55,11 @@ class Dragon(Obj):
 
         self.ticks = 0
         self.frame = 0
+        self.vel = 4
+        self.grav = 1
 
     def update(self, *args):
-        self.anim()
+
         self.move()
 
     def anim(self):
@@ -75,5 +77,18 @@ class Dragon(Obj):
     def move(self):
         key = pygame.key.get_pressed()
 
+        self.vel += self.grav
+        self.rect.y += self.vel
+
+        if self.vel >= 15:
+            self.vel = 15
+
         if key[pygame.K_SPACE]:
-            print("VOAR")
+            self.anim()
+            self.vel -= 3
+
+        if self.rect.y >= 440:
+            self.rect.y = 440
+        elif self.rect.y <= -30:
+            self.rect.y = -30
+            self.vel = 4

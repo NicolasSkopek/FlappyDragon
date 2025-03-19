@@ -17,7 +17,7 @@ class Game:
         self.ground = Obj("assets/ground.png", 0, 400, 360, 360, self.all_sprites)
         self.ground_2 = Obj("assets/ground.png", 360, 400, 360, 360, self.all_sprites)
 
-        self.dragon = Dragon("assets/dragons/dragon1.png", 10, 230, 36, 22.5, self.all_sprites)
+        self.dragon = Dragon("assets/dragons/dragon1.png", 10, 230, 144, 90, self.all_sprites)
 
         self.ticks = 0
 
